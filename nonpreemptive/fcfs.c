@@ -23,12 +23,6 @@ int main(){
     int smallAt = 0;
     while(count!=n){
         smallest = 0;
-        // for(i=0; i<n; i++){
-        //     if(p[i].at<=time && p[i].at<=p[smallest].at && p[i].rt && p[i].completed==0){
-        //         smallest = i;
-                
-        //     }
-        // }
         temp = smallest;
         
         for(i=0; i<n; i++){
@@ -46,9 +40,6 @@ int main(){
         if(p[smallest].at>=time){
             p[smallest].rt += (time - p[smallest].at);
         }
-        // if(count==0){
-        //     p[smallest].rt += p[smallest].at;
-        // }
         time += p[smallest].rt;
         p[smallest].rt -= p[smallest].rt;
         p[smallest].completed = 1;
