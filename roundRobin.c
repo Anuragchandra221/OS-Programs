@@ -33,16 +33,16 @@ int main(){
             break;
         }
     }
-    printf("\nprocess\tburst time\tturnaround time\twaiting time\n");
+    printf("\nPro\tBt\tTat\tWt");
     for(i=0; i<n; i++){
         wt[i] = tat[i]-bt[i];
         awt=awt+wt[i];
         atat=atat+tat[i];
-        printf("\n%d\t%d\t\t%d\t\t%d", i+1, bt[i], tat[i], wt[i]);
+        printf("\n%d\t%d\t%d\t%d", i+1, bt[i], tat[i], wt[i]);
     }
     awt = awt/n;
     atat = atat/n;
-    printf("Avg waiting time: %f\n", awt);
-    printf("Avg turnaroung time: %f", atat);
+    printf("\nAvg waiting time: %.2f\n", awt);
+    printf("Avg turnaroung time: %.2f", atat);
     return 0;
 }

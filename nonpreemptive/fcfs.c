@@ -5,7 +5,8 @@ struct process{
 }p[10];
 int main(){
     int  completiontime, i, smallest;
-    int count=0, time, sumWait=0, sumTurnaround=0;
+    int count=0, time;
+    float sumWait=0, sumTurnaround=0;
     printf("Enter no of processes: ");
     scanf("%d", &n);
     for(i=0; i<n; i++){
@@ -52,5 +53,5 @@ int main(){
             printf("\nP%d\t%d\t%d\t%d\t%d\t%d\t%d\t", p[smallest].id, p[smallest].at, p[smallest].priority, p[smallest].bt, completiontime, completiontime-p[smallest].at, completiontime-p[smallest].at-p[smallest].bt );
         }
     }
-    printf("\nAvg wt = %d\nAvg tat = %d\n", sumWait/n, sumTurnaround/n);
+    printf("\nAvg wt = %.2lf\nAvg tat = %.2lf\n", sumWait/n, sumTurnaround/n);
 }
