@@ -13,8 +13,6 @@ int main(){
         scanf("%d", &p[i].at);
         printf("Enter burst time of process p%d: ",i+1);
         scanf("%d", &p[i].bt);
-        printf("Enter priority of process p%d: ",i+1);
-        scanf("%d", &p[i].priority);
         p[i].rt = p[i].bt;
         p[i].completed = 0;
         p[i].id = i+1;
@@ -22,27 +20,40 @@ int main(){
     time = 0;
     printf("\nPId\tAt\tPrio\tBt\tCt\tTat\tWt");
     int temp;
-    int maxPrio;
+    int smallAt = 0;
     while(count!=n){
+        smallest = 0;
+        // for(i=0; i<n; i++){
+        //     if(p[i].at<=time && p[i].at<=p[smallest].at && p[i].rt && p[i].completed==0){
+        //         smallest = i;
+                
+        //     }
+        // }
+        temp = smallest;
+        
         for(i=0; i<n; i++){
-            if( p[i].at<=time && p[i].completed==0){
-                maxPrio = p[i].priority;
+            if(p[i].completed==0){
+                smallAt = p[i].at;
                 break;
             }
         }
         for(i=0; i<n; i++){
-            if(p[i].at<=time && p[i].priority<=maxPrio && p[i].completed==0){
-                maxPrio = p[i].priority;
+            if(p[i].at<=time && p[i].at<=smallAt && p[i].completed==0){
+                smallAt = p[i].at;
                 smallest = i;
             }
         }
         if(p[smallest].at>=time){
-            p[smallest].rt += ( p[smallest].at - time);
+            p[smallest].rt += (time - p[smallest].at);
         }
+        // if(count==0){
+        //     p[smallest].rt += p[smallest].at;
+        // }
         time += p[smallest].rt;
         p[smallest].rt -= p[smallest].rt;
         p[smallest].completed = 1;
         if(p[smallest].rt==0){
+            
             count++;
             completiontime = time;
             sumWait = sumWait + (completiontime-p[smallest].at-p[smallest].bt);

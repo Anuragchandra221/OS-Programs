@@ -1,39 +1,54 @@
 #include<stdio.h>
+int n;
+struct process{
+    int id,at,bt,completed,priority, rt;
+}p[10];
 int main(){
-    int at[10], bt[10], rt[10], completiontime, i, smallest, sbt=0, completed[10];
-    int count=0, n, time, sumWait=0, sumTurnaround=0;
+    int  completiontime, i, smallest;
+    int count=0, time, sumWait=0, sumTurnaround=0;
     printf("Enter no of processes: ");
     scanf("%d", &n);
     for(i=0; i<n; i++){
         printf("Enter arrival time of process p%d: ",i+1);
-        scanf("%d", &at[i]);
+        scanf("%d", &p[i].at);
         printf("Enter burst time of process p%d: ",i+1);
-        scanf("%d", &bt[i]);
-        rt[i] = bt[i];
-        completed[i] = 0;
+        scanf("%d", &p[i].bt);
+        p[i].rt = p[i].bt;
+        p[i].completed = 0;
+        p[i].id = i+1;
     }
     time = 0;
-    printf("\nPId\tAt\tBt\tCt\tTat\tWt");
+    int maxBt;
+    printf("\nPId\tAt\tPrio\tBt\tCt\tTat\tWt");
     int temp;
     while(count!=n){
+        smallest = 0;
+        
         for(i=0; i<n; i++){
-            if(at[i]<=time && rt[i] && completed[i]==0){
+            if( p[i].at<=time && p[i].completed==0){
+                maxBt = p[i].bt;
+                break;
+            }
+        }
+        for(i=0; i<n; i++){
+            if(p[i].at<=time && p[i].bt>=maxBt && p[i].completed==0){
+                maxBt = p[i].bt;
                 smallest = i;
             }
         }
-        temp = smallest;
-        for(i=0; i<n; i++){
-            if(at[i]<=time && bt[i]<=bt[smallest] && completed[i]==0){
-                smallest = i;
-            }
+        if(p[smallest].at>=time){
+            p[smallest].rt += ( p[smallest].at - time);
         }
-        time += rt[smallest];
-        rt[smallest] -=rt[smallest];
-        completed[smallest] = 1;
-        if(rt[smallest]==0){
+        time += p[smallest].rt;
+        p[smallest].rt -= p[smallest].rt;
+        p[smallest].completed = 1;
+        if(p[smallest].rt==0){
             count++;
             completiontime = time;
-            printf("\nP%d\t%d\t%d\t%d\t%d\t%d", smallest+1, at[smallest], bt[smallest], completiontime, completiontime-at[smallest], completiontime-at[smallest]-bt[smallest] );
+            sumWait = sumWait + (completiontime-p[smallest].at-p[smallest].bt);
+            sumTurnaround = sumTurnaround + (completiontime-p[smallest].at);
+            printf("\nP%d\t%d\t%d\t%d\t%d\t%d\t%d\t", p[smallest].id, p[smallest].at, p[smallest].priority, p[smallest].bt, completiontime, completiontime-p[smallest].at, completiontime-p[smallest].at-p[smallest].bt );
         }
     }
+        printf("\nAvg wt = %d\nAvg tat = %d\n", sumWait/n, sumTurnaround/n);
 }
