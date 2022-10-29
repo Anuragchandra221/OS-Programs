@@ -52,7 +52,7 @@ int main(){
     }
     int flag=0;
     int count = 0;
-    printf("\nAvailable\n");
+    printf("\n");
     while(count<n-1){
         for(i=0; i<n; i++){
             for(j=0; j<m; j++){
@@ -62,29 +62,18 @@ int main(){
                     flag = 0;
                     break;
                 }
-        }
-        if (flag==1){
-            finish[i]=1;
-            count ++;
-            for(j=0; j<m; j++){
-                work[j] += allocation[i][j];
             }
-            printf("P%d\n", i+1);
+            if (flag==1){
+                finish[i]=1;
+                count ++;
+                for(j=0; j<m; j++){
+                    work[j] += allocation[i][j];
+                }
+                printf("P%d  ", i+1);
+            }
         }
-    for(j=0; j<m; j++){
-            printf("%d ",work[j]);
+        if (flag==0){
+            count++;
         }
-        printf("\n");
     }
-    if (flag==0){
-        count++;
-    }
-    }
-    printf("%d", count);
-    // for(i=0; i<n; i++){
-    //     if(finish[i] == 1){
-    //         printf("P%d--", i+1);
-    //     }
-    // }
-    
 }
