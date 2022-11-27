@@ -13,7 +13,6 @@ int findtop(int stop){
             distance[i]++;
         }
     }
-    printf("\nDistance %d\n", distance[i]);
     }
     int max = distance[0], pos=0;
     for(i=0; i<n; i++){
@@ -66,4 +65,4 @@ int main(){
     }
     printf("\nHit is %d", hit);
     printf("Fault is %d", np-hit);
-}
+} 

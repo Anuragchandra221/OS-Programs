@@ -65,4 +65,4 @@ int main(){
     }
     printf("\nHit is %d", hit);
     printf("Fault is %d", np-hit);
-}
+}  
