@@ -41,10 +41,10 @@ int main(){
         p[i].flag = 0;
     }
     for(i=0; i<m; i++){
+        sort(n);
         for(j=0; j<n; j++){
             if(p[i].flag!=1){
                 if(p[i].size<=b[j].size){
-                    sort(n);
                     printf("\n%d on %d", p[i].size, b[j].size);
                     b[j].size -= p[i].size;
                     printf("  %d\n",b[j].no);
